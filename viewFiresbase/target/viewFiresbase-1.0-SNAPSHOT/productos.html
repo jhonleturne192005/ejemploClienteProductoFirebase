@@ -1,0 +1,108 @@
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid d-flex align-items-end flex-column">
+    <form class="d-flex" role="search">
+      <a class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">
+        Agregar
+      </a>
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col">
+      <div class="row w-100">
+        <div class="col-md-10">
+          <input ng-model="nombre" class="form-control mr-5 mt-5" type="search" placeholder="Nombre producto...." aria-label="Search">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary mt-5" type="submit" ng-click="buscar()">Buscar</button>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Empresa</th>
+              <th scope="col">Precio unitario</th>
+              <th scope="col">Descuento</th>
+              <th scope="col">Proveedor</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="per in productos">
+              <!--<th scope="row">{{per.cedula}}</th>-->
+              <td>{{per.nombre}}</td>
+              <td>{{per.empresa}}</td>
+              <td>{{per.precio_unitario}}</td>
+              <td>{{per.descuento}}</td>
+              <td>{{per.proveedor}}</td>
+              <td>{{per.descripcion}}</td>
+              <td>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ng-click="editar(per)">Editar</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-warning" ng-click="eliminar(per.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form name="form" ng-submit="actualizar_guardar(form)">
+  
+          <input id="id" name="id" ng-model="id" type="hidden">
+   
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input class="form-control" id="nombre" name="nombre" ng-model="nombre" type="text" maxlength="50" placeholder="Ingrese la nombre de producto" aria-label="default input example" required>
+          </div>
+          <div class="mb-3">
+            <label for="empresa" class="form-label">Empresa</label>
+            <input class="form-control" id="empresa" name="empresa" ng-model="empresa" type="text" maxlength="50" placeholder="Ingrese nombre de la empresa" aria-label="default input example" required>
+          </div>
+          <div class="mb-3">
+            <label for="precio_unitario" class="form-label">Precio unitario</label>
+            <input class="form-control" step=".01" id="precio_unitario" name="precio_unitario" ng-model="precio_unitario" type="number" maxlength="4" placeholder="Ingrese precio unitario" aria-label="default input example" required>
+          </div>
+          <div class="mb-3">
+            <label for="descuento" class="form-label">Descuento</label>
+            <input type="number"step=".01"  class="form-control" name="descuento" id="descuento" ng-model="descuento" placeholder="Ingrese descuento" aria-describedby="emailHelp" required>
+          </div>
+          <div class="mb-3">
+            <label for="proveedor" class="form-label">Proveedor</label>
+            <input type="text" class="form-control" name="proveedor" id="proveedor" ng-model="proveedor" placeholder="Ingrese proveedor" aria-describedby="emailHelp" required>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" name="descripcion" id="descripcion" ng-model="descripcion" placeholder="Ingrese desripcion" aria-describedby="emailHelp" required>
+          </div>
+          <button class="btn btn-primary" data-bs-dismiss="modal" type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
